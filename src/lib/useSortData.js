@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 function useSortData(data) {
   const sortedData = useMemo(() => {
@@ -25,21 +25,21 @@ function useSortData(data) {
 // utils/function for checking primeNumber and setDeathTime for every entries
 const isPrime = (grade) => {
   for (let i = 2, s = Math.sqrt(grade); i <= s; i++) {
-    if (grade % 2 == 0) return false;
+    if (grade % i == 0) return false;
   }
   return grade > 1;
 };
 
 const getDeathTimer = (grade) => {
   const currentYear = new Date().getFullYear();
-  const currentMonth = new Date().getMonth();
-  const cursedMonth = (grade - 1)?.toString().at(-1);
+  const currentMonth = new Date().getMonth() + 1;
+  const cursedMonth = grade?.toString().at(-1);
   let obj;
-  if (currentMonth <= cursedMonth) {
-    obj = { deathTime: new Date(currentYear, cursedMonth).toLocaleString() };
+  if (currentMonth <= Number(cursedMonth)) {
+    obj = { deathTime: new Date(currentYear, cursedMonth, 0).toLocaleString() };
   } else {
     obj = {
-      deathTime: new Date(currentYear + 1, cursedMonth).toLocaleString(),
+      deathTime: new Date(currentYear + 1, cursedMonth, 0).toLocaleString(),
     };
   }
   return isPrime(grade) ? obj : { deathTime: null };

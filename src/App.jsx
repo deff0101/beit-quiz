@@ -3,12 +3,27 @@ import useFetch from "./lib/useFetch";
 import useSortData from "./lib/useSortData";
 
 function App() {
-  const [data, isLoading] = useFetch("/src/mocks/mockApi.json");
+  const [data, isLoading] = useFetch(
+    "http://ecocim-backend-theone.beit.co.id/api/ManualConfig/TestBEIT"
+  );
   const [kelas, setKelas] = useState(0);
   const sortedData = useSortData(data);
   const filterKelas = sortedData?.filter((data) => data.kelas == kelas + 1);
-  console.log(sortedData, "sorted data");
-  console.log("component re render");
+
+  function handleTotalCursed(data) {
+    const total = data?.filter((d) => {
+      const currentMonth = new Date().getMonth() + 1;
+      if (data && currentMonth === new Date(d?.deathTime).getMonth() + 1)
+        return d;
+    }).length;
+    return total;
+  }
+
+  const totalCursedGlobally = handleTotalCursed(sortedData);
+  const totalCursedClass = handleTotalCursed(filterKelas);
+  const totalMarriage =
+    kelas == 5 && filterKelas.filter((d) => d.nilai % 7 === 0).length;
+
   if (isLoading) return <p>Loading ..</p>;
   return (
     <>
@@ -57,7 +72,7 @@ function App() {
                 }
               );
               return (
-                <tr>
+                <tr key={data.name}>
                   <td>{data.name} </td>
                   <td>{data.kelas} </td>
                   <td>{data.nilai} </td>
@@ -68,6 +83,15 @@ function App() {
             })}
         </tbody>
       </table>
+      <div>
+        <p>
+          Total Stundents Cursed this month ( globally ) : {totalCursedGlobally}
+        </p>
+        <p>
+          Total Stundents Cursed this month ( per class ) :{totalCursedClass}
+        </p>
+        {kelas == 5 && <p>Total Stundents Marry next year: {totalMarriage}</p>}
+      </div>
     </>
   );
 }
