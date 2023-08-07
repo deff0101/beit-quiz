@@ -4,7 +4,7 @@ import useSortData from "./lib/useSortData";
 
 function App() {
   const [data, isLoading] = useFetch(
-    "http://ecocim-backend-theone.beit.co.id/api/ManualConfig/TestBEIT"
+    "https://ecocim-backend-theone.beit.co.id/api/ManualConfig/TestBEIT"
   );
   const [kelas, setKelas] = useState(0);
   const sortedData = useSortData(data);
