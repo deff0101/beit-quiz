@@ -33,7 +33,7 @@ function App() {
           onClick={() => setKelas((prev) => (prev = i))}
           disabled={kelas === i}
         >
-          kelas {i + 1}
+          kelas {i === 5 ? "spesial" : i}
         </button>
       ))}
       <table
