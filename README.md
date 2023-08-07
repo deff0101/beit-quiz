@@ -7,5 +7,7 @@ how to install :
 2. make sure npm installed , then install package with npm.
    > npm install
 3. run locally.
-   > npm run dev
-   > 4.open with your favourite browser.
+
+   > npm run dev.
+
+4. open with your favourite browser.
