@@ -33,7 +33,7 @@ function App() {
           onClick={() => setKelas((prev) => (prev = i))}
           disabled={kelas === i}
         >
-          kelas {i === 5 ? "spesial" : i}
+          kelas {i === 5 ? "spesial" : i + 1}
         </button>
       ))}
       <table
@@ -85,12 +85,14 @@ function App() {
       </table>
       <div>
         <p>
-          Total Stundents Cursed this month ( globally ) : {totalCursedGlobally}
+          Total Student Cursed (will die) this month ( globally ) :{" "}
+          {totalCursedGlobally}
         </p>
         <p>
-          Total Stundents Cursed this month ( per class ) :{totalCursedClass}
+          Total Student Cursed (will die) this month ( per class ) :
+          {totalCursedClass}
         </p>
-        {kelas == 5 && <p>Total Stundents Marry next year: {totalMarriage}</p>}
+        {kelas == 5 && <p>Total Student Marry next year: {totalMarriage}</p>}
       </div>
     </>
   );
